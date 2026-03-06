@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>Checkout</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="checkout">
+    <h2>To'lov sahifasi</h2>
+    <form onsubmit="return fakePayment()">
+        <input type="text" placeholder="Ismingiz" required>
+        <input type="text" placeholder="Karta raqami" required>
+        <button type="submit">To'lov qilish</button>
+    </form>
+</div>
+
+<script>
+function fakePayment(){
+    alert("To'lov muvaffaqiyatli amalga oshirildi ✅");
+    localStorage.removeItem("cart");
+    return false;
+}
+</script>
+
+</body>
+</html>

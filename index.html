@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Shop Pro</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>🖥 Tech Shop</h1>
+
+    <div class="burger" onclick="toggleMenu()">☰</div>
+
+    <nav id="navMenu">
+        <ul>
+            <li onclick="filterCategory('all')">Barchasi</li>
+            <li onclick="filterCategory('laptop')">Noutbook</li>
+            <li onclick="filterCategory('monitor')">Monitor</li>
+            <li onclick="filterCategory('peripheral')">Tashqi qurilmalar</li>
+        </ul>
+    </nav>
+
+    <div class="header-right">
+        <input type="text" id="searchInput" placeholder="Qidiruv..." onkeyup="searchProduct()">
+        <button onclick="toggleDarkMode()">🌙</button>
+        <button onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+    </div>
+</header>
+
+<section class="products" id="productList"></section>
+
+<div class="cart" id="cart">
+    <h2>Savatcha</h2>
+    <div id="cartItems"></div>
+    <h3 id="totalPrice">Jami: $0</h3>
+    <a href="checkout.html"><button>Checkout</button></a>
+    <button onclick="closeCart()">Yopish</button>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#1e3c72,#2a5298);
+    color:#fff;
+    min-height:100vh;
+    transition:0.4s;
+}
+
+body.dark{
+    background: linear-gradient(135deg,#000000,#1f1f1f);
+}
+
+/* HEADER */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 40px;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.1);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+header h1{
+    font-size:24px;
+    font-weight:600;
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+nav ul li{
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:500;
+}
+
+nav ul li:hover{
+    color:#00f2fe;
+}
+
+/* RIGHT SIDE */
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.header-right input{
+    padding:8px 12px;
+    border-radius:20px;
+    border:none;
+    outline:none;
+}
+
+.header-right button{
+    padding:8px 12px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    background:#00c6ff;
+    color:#fff;
+    transition:0.3s;
+}
+
+.header-right button:hover{
+    background:#0072ff;
+}
+
+/* PRODUCTS GRID */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:30px;
+    padding:50px;
+}
+
+/* PRODUCT CARD */
+
+.card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.4);
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.card h3{
+    margin:15px 0 10px;
+}
+
+.card button{
+    margin-top:10px;
+    padding:10px;
+    width:100%;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(90deg,#00f2fe,#4facfe);
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card button:hover{
+    opacity:0.8;
+}
+
+/* CART PANEL */
+
+.cart{
+    position:fixed;
+    right:-400px;
+    top:0;
+    width:350px;
+    height:100%;
+    background:#111;
+    padding:25px;
+    transition:0.4s;
+    overflow-y:auto;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.5);
+}
+
+.cart.active{
+    right:0;
+}
+
+.cart h2{
+    margin-bottom:20px;
+}
+
+.cart p{
+    margin:8px 0;
+}
+
+/* CHECKOUT PAGE */
+
+.checkout{
+    max-width:450px;
+    margin:120px auto;
+    padding:30px;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    text-align:center;
+}
+
+.checkout input{
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
+
+.checkout button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:20px;
+    background:linear-gradient(90deg,#00f2fe,#4facfe);
+    cursor:pointer;
+}
+
+/* BURGER */
+
+.burger{
+    display:none;
+    font-size:26px;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+    nav ul{
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        flex-direction:column;
+        background:#111;
+        display:none;
+        padding:20px;
+    }
+
+    nav ul.active{
+        display:flex;
+    }
+
+    .burger{
+        display:block;
+    }
+
+    .products{
+        padding:20px;
+    }
+/* MODAL */
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:200;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-content{
+    background:#111;
+    padding:30px;
+    border-radius:20px;
+    width:90%;
+    max-width:500px;
+    text-align:center;
+    animation:fadeIn 0.3s ease;
+}
+
+.modal-content img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.modal-content ul{
+    text-align:left;
+    margin:15px 0;
+}
+
+.modal-content button{
+    padding:12px;
+    width:100%;
+    border:none;
+    border-radius:20px;
+    background:linear-gradient(90deg,#00f2fe,#4facfe);
+    cursor:pointer;
+}
+
+.close{
+    float:right;
+    font-size:22px;
+    cursor:pointer;
+}
+
+@keyframes fadeIn{
+    from{transform:scale(0.8); opacity:0;}
+    to{transform:scale(1); opacity:1;}
+}
+}

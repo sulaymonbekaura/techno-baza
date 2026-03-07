@@ -3,35 +3,35 @@ const products = [
     name:"MacBook Pro",
     price:1500,
     category:"laptop",
-    image:"https://picsum.photos/500/300?1",
+    image:"images/macbook-pro.webp",
     specs:["M2 Chip","16GB RAM","512GB SSD","14 inch Retina"]
 },
 {
     name:"HP Pavilion",
     price:900,
     category:"laptop",
-    image:"https://picsum.photos/500/300?2",
+    image:"images/hp-pavilion.webp",
     specs:["Intel i7","16GB RAM","1TB SSD","15.6 inch"]
 },
 {
     name:"Samsung Monitor",
     price:300,
     category:"monitor",
-    image:"https://picsum.photos/500/300?3",
+    image:"images/samsung-monitor.webp",
     specs:["27 inch","144Hz","Full HD","IPS Panel"]
 },
 {
     name:"Gaming Mouse",
     price:40,
     category:"peripheral",
-    image:"https://picsum.photos/500/300?4",
+    image:"images/gaming-mouse.webp",
     specs:["RGB Light","7200 DPI","USB Type-A"]
 },
 {
     name:"Mechanical Keyboard",
     price:80,
     category:"peripheral",
-    image:"https://picsum.photos/500/300?5",
+    image:"images/keyboard.webp",
     specs:["Blue Switch","RGB","Anti-Ghosting"]
 }
 ];
@@ -86,6 +86,31 @@ function addToCart(index){
 function updateCart(){
     document.getElementById("cartCount").innerText=cart.length;
 }
+function searchProduct(){
+    let value = document.getElementById("searchInput").value.toLowerCase();
 
+    const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(value)
+    );
+
+    displayProducts(filtered);
+}
+function toggleMenu(){
+    document.querySelector("nav ul").classList.toggle("active");
+}
+function filterCategory(cat){
+    if(cat === "all"){
+        displayProducts(products);
+    }else{
+        const filtered = products.filter(p => p.category === cat);
+        displayProducts(filtered);
+    }
+}
+const burger = document.querySelector(".burger");
+const navLinks = document.querySelector("nav ul");
+
+burger.addEventListener("click",()=>{
+navLinks.classList.toggle("active");
+});
 displayProducts(products);
 updateCart();

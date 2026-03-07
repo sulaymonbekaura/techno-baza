@@ -220,6 +220,7 @@ nav ul li:hover{
     .products{
         padding:20px;
     }
+}
 /* MODAL */
 
 .modal{
@@ -280,4 +281,76 @@ nav ul li:hover{
     from{transform:scale(0.8); opacity:0;}
     to{transform:scale(1); opacity:1;}
 }
+/* Responsive Design */
+
+@media (max-width: 1024px) {
+.products{
+grid-template-columns: repeat(2,1fr);
+}
+}
+
+@media (max-width: 768px) {
+
+nav{
+flex-direction: column;
+align-items: flex-start;
+}
+
+nav ul{
+flex-direction: column;
+width: 100%;
+display: none;
+margin-top: 10px;
+}
+
+nav ul.active{
+display: flex;
+}
+
+.burger{
+display:block;
+cursor:pointer;
+font-size:22px;
+}
+
+.products{
+grid-template-columns:1fr;
+padding:15px;
+}
+
+.product-card img{
+height:200px;
+object-fit:cover;
+}
+
+.search{
+width:100%;
+margin:10px 0;
+}
+
+.cart{
+width:100%;
+}
+
+}
+
+@media (max-width:480px){
+
+.hero h1{
+font-size:22px;
+text-align:center;
+}
+
+.product-card{
+padding:10px;
+}
+
+.product-card h3{
+font-size:18px;
+}
+
+.product-card button{
+width:100%;
+}
+
 }

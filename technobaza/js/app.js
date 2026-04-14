@@ -4,35 +4,21 @@ const products = [
     price:1500,
     category:"laptop",
     image:"images/macbook-pro.webp",
-    specs:["M2 Chip","16GB RAM","512GB SSD","14 inch Retina"]
+    specs:["M2 Chip","16GB RAM","512GB SSD","14 inch"]
 },
 {
     name:"HP Pavilion",
     price:900,
     category:"laptop",
     image:"images/hp-pavilion.webp",
-    specs:["Intel i7","16GB RAM","1TB SSD","15.6 inch"]
+    specs:["Intel i7","16GB RAM","1TB SSD"]
 },
 {
     name:"Samsung Monitor",
     price:300,
     category:"monitor",
     image:"images/samsung-monitor.webp",
-    specs:["27 inch","144Hz","Full HD","IPS Panel"]
-},
-{
-    name:"Gaming Mouse",
-    price:40,
-    category:"peripheral",
-    image:"images/gaming-mouse.webp",
-    specs:["RGB Light","7200 DPI","USB Type-A"]
-},
-{
-    name:"Mechanical Keyboard",
-    price:80,
-    category:"peripheral",
-    image:"images/keyboard.webp",
-    specs:["Blue Switch","RGB","Anti-Ghosting"]
+    specs:["27 inch","144Hz","IPS"]
 }
 ];
 
@@ -53,41 +39,59 @@ function displayProducts(items){
 }
 
 function openModal(index){
-    const product = products[index];
+    const p = products[index];
 
-    document.getElementById("modalImg").src = product.image;
-    document.getElementById("modalTitle").innerText = product.name;
-    document.getElementById("modalPrice").innerText = "$"+product.price;
+    modalImg.src = p.image;
+    modalTitle.innerText = p.name;
+    modalPrice.innerText = "$"+p.price;
 
-    const specsList = document.getElementById("modalSpecs");
-    specsList.innerHTML="";
-    product.specs.forEach(spec=>{
-        specsList.innerHTML += `<li>${spec}</li>`;
+    modalSpecs.innerHTML="";
+    p.specs.forEach(s=>{
+        modalSpecs.innerHTML+=`<li>${s}</li>`;
     });
 
-    document.getElementById("modalCartBtn").onclick = function(){
-        addToCart(index);
-        closeModal();
-    };
+    modalCartBtn.onclick = () => addToCart(index);
 
-    document.getElementById("productModal").classList.add("active");
+    productModal.classList.add("active");
 }
 
 function closeModal(){
-    document.getElementById("productModal").classList.remove("active");
+    productModal.classList.remove("active");
 }
 
 function addToCart(index){
     cart.push(products[index]);
-    localStorage.setItem("cart",JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
     updateCart();
 }
 
 function updateCart(){
-    document.getElementById("cartCount").innerText=cart.length;
+    document.getElementById("cartCount").innerText = cart.length;
+
+    const cartItems = document.getElementById("cartItems");
+    const totalPrice = document.getElementById("totalPrice");
+
+    cartItems.innerHTML="";
+    let total = 0;
+
+    cart.forEach(item=>{
+        total += item.price;
+        cartItems.innerHTML += `<p>${item.name} - $${item.price}</p>`;
+    });
+
+    totalPrice.innerText = "Jami: $" + total;
 }
+
+function openCart(){
+    document.getElementById("cart").classList.add("active");
+}
+
+function closeCart(){
+    document.getElementById("cart").classList.remove("active");
+}
+
 function searchProduct(){
-    let value = document.getElementById("searchInput").value.toLowerCase();
+    let value = searchInput.value.toLowerCase();
 
     const filtered = products.filter(p =>
         p.name.toLowerCase().includes(value)
@@ -95,22 +99,18 @@ function searchProduct(){
 
     displayProducts(filtered);
 }
-function toggleMenu(){
-    document.querySelector("nav ul").classList.toggle("active");
-}
+
 function filterCategory(cat){
     if(cat === "all"){
         displayProducts(products);
-    }else{
-        const filtered = products.filter(p => p.category === cat);
-        displayProducts(filtered);
+    } else {
+        displayProducts(products.filter(p => p.category === cat));
     }
 }
-const burger = document.querySelector(".burger");
-const navLinks = document.querySelector("nav ul");
 
-burger.addEventListener("click",()=>{
-navLinks.classList.toggle("active");
-});
+function toggleMenu(){
+    document.querySelector("nav ul").classList.toggle("active");
+}
+
 displayProducts(products);
 updateCart();

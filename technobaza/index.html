@@ -3,107 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-<title>Techno Baza</title>
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header>
-<h1>⚡ Techno Baza</h1>
-<p>Zamonaviy texnologiyalar haqida sayt</p>
-</header>
-
-<nav>
-<a href="#">Bosh sahifa</a>
-<a href="#">Texnologiyalar</a>
-<a href="#">Yangiliklar</a>
-<a href="#">Aloqa</a>
-</nav>
-
-<section class="cards">
-
-<div class="card">
-<h2>Sun'iy Intellekt</h2>
-<p>AI kelajak texnologiyalarining asosidir.</p>
-<button onclick="info()">Batafsil</button>
-</div>
-
-<div class="card">
-<h2>Robototexnika</h2>
-<p>Robotlar sanoat va hayotni o'zgartirmoqda.</p>
-<button onclick="info()">Batafsil</button>
-</div>
-
-<div class="card">
-<h2>Web Dasturlash</h2>
-<p>HTML, CSS, JavaScript orqali saytlar yaratiladi.</p>
-<button onclick="info()">Batafsil</button>
-</div>
-
-</section>
-
-<footer>
-<p>© 2026 Techno Baza</p>
-</footer>
-
-<script src="script.js"></script>
-=======
 <title>Tech Shop Pro</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 <header>
-    <h1>🖥 Tech Shop</h1>
-
-    <div class="burger" onclick="toggleMenu()">☰</div>
-
-    <nav id="navMenu">
-        <ul>
-            <li onclick="filterCategory('all')">Barchasi</li>
-            <li onclick="filterCategory('laptop')">Noutbook</li>
-            <li onclick="filterCategory('monitor')">Monitor</li>
-            <li onclick="filterCategory('peripheral')">Tashqi qurilmalar</li>
-            <div class="burger">☰</div>
-        </ul>
-    </nav>
+    <h1> Tech Shop</h1>
 
     <div class="header-right">
-        <input type="text" id="searchInput" placeholder="Qidiruv..." onkeyup="searchProduct()">
-        <button onclick="toggleDarkMode()">🌙</button>
+        <!-- APPLE TOGGLE -->
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider"></span>
+        </label>
+
         <button onclick="openCart()">🛒 <span id="cartCount">0</span></button>
     </div>
 </header>
 
+<nav>
+    <button onclick="filterCategory('all')">Barchasi</button>
+    <button onclick="filterCategory('laptop')">Noutbuk</button>
+    <button onclick="filterCategory('monitor')">Monitor</button>
+    <button onclick="filterCategory('peripheral')">Qurilmalar</button>
+</nav>
+
+<input type="text" id="searchInput" placeholder="Qidiruv..." onkeyup="searchProduct()">
+
 <section class="products" id="productList"></section>
 
+<!-- CART -->
 <div class="cart" id="cart">
     <h2>Savatcha</h2>
     <div id="cartItems"></div>
-    <h3 id="totalPrice">Jami: $0</h3>
+    <h3 id="totalPrice"></h3>
     <a href="checkout.html"><button>Checkout</button></a>
     <button onclick="closeCart()">Yopish</button>
 </div>
-<!-- PRODUCT MODAL -->
+
+<!-- MODAL -->
 <div class="modal" id="productModal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">×</span>
 
     <img id="modalImg">
-
     <h2 id="modalTitle"></h2>
-
     <p id="modalPrice"></p>
-
     <ul id="modalSpecs"></ul>
 
     <button id="modalCartBtn">Savatchaga qo‘shish</button>
-
   </div>
 </div>
+
 <script src="js/app.js"></script>
->>>>>>> a0f7113 (Update project)
 </body>
 </html>

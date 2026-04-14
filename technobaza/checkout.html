@@ -2,25 +2,47 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<div class="checkout">
-    <h2>To'lov sahifasi</h2>
-    <form onsubmit="return fakePayment()">
+<div class="checkout-container">
+    <h1>💳 Buyurtma berish</h1>
+
+    <div id="orderList"></div>
+    <h2 id="total"></h2>
+
+    <form onsubmit="submitOrder(event)">
         <input type="text" placeholder="Ismingiz" required>
-        <input type="text" placeholder="Karta raqami" required>
-        <button type="submit">To'lov qilish</button>
+        <input type="text" placeholder="Telefon raqam" required>
+        <input type="text" placeholder="Manzil" required>
+
+        <button type="submit">Buyurtma berish</button>
     </form>
 </div>
 
 <script>
-function fakePayment(){
-    alert("To'lov muvaffaqiyatli amalga oshirildi ✅");
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const orderList = document.getElementById("orderList");
+const totalBox = document.getElementById("total");
+
+let total = 0;
+
+cart.forEach(item=>{
+    total += item.price;
+    orderList.innerHTML += `<p>${item.name} - $${item.price}</p>`;
+});
+
+totalBox.innerText = "Jami: $" + total;
+
+function submitOrder(e){
+    e.preventDefault();
+    alert("✅ Buyurtma qabul qilindi!");
     localStorage.removeItem("cart");
-    return false;
+    window.location.href = "index.html";
 }
 </script>
 

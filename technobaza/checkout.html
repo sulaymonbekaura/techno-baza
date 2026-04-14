@@ -9,40 +9,37 @@
 
 <body>
 
-<div class="checkout-container">
-    <h1>💳 Buyurtma berish</h1>
+<div class="checkout">
+    <h1>💳 Checkout</h1>
 
     <div id="orderList"></div>
     <h2 id="total"></h2>
 
     <form onsubmit="submitOrder(event)">
-        <input type="text" placeholder="Ismingiz" required>
-        <input type="text" placeholder="Telefon raqam" required>
+        <input type="text" placeholder="Ism" required>
+        <input type="text" placeholder="Telefon" required>
         <input type="text" placeholder="Manzil" required>
 
-        <button type="submit">Buyurtma berish</button>
+        <button type="submit">Tasdiqlash</button>
     </form>
 </div>
 
 <script>
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
-const orderList = document.getElementById("orderList");
-const totalBox = document.getElementById("total");
-
 let total = 0;
 
-cart.forEach(item=>{
-    total += item.price;
-    orderList.innerHTML += `<p>${item.name} - $${item.price}</p>`;
+cart.forEach(i=>{
+    total += i.price;
+    orderList.innerHTML += `<p>${i.name} - $${i.price}</p>`;
 });
 
-totalBox.innerText = "Jami: $" + total;
+total.innerText = "Jami: $" + total;
 
 function submitOrder(e){
     e.preventDefault();
-    alert("✅ Buyurtma qabul qilindi!");
+    alert("Buyurtma qabul qilindi!");
     localStorage.removeItem("cart");
-    window.location.href = "index.html";
+    location.href="index.html";
 }
 </script>
 

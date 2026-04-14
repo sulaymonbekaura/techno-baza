@@ -1,30 +1,10 @@
 const products = [
-{
-    name:"MacBook Pro",
-    price:1500,
-    category:"laptop",
-    image:"images/macbook-pro.webp",
-    specs:["M2 Chip","16GB RAM","512GB SSD","14 inch"]
-},
-{
-    name:"HP Pavilion",
-    price:900,
-    category:"laptop",
-    image:"images/hp-pavilion.webp",
-    specs:["Intel i7","16GB RAM","1TB SSD"]
-},
-{
-    name:"Samsung Monitor",
-    price:300,
-    category:"monitor",
-    image:"images/samsung-monitor.webp",
-    specs:["27 inch","144Hz","IPS"]
-}
+{name:"MacBook Pro",price:1500,category:"laptop",image:"images/macbook-pro.webp",specs:["M2","16GB","512GB"]},
+{name:"HP Pavilion",price:900,category:"laptop",image:"images/hp.webp",specs:["i7","16GB","1TB"]},
+{name:"Monitor",price:300,category:"monitor",image:"images/monitor.webp",specs:["27 inch","144Hz"]},
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-const productList = document.getElementById("productList");
 
 function displayProducts(items){
     productList.innerHTML="";
@@ -38,19 +18,17 @@ function displayProducts(items){
     });
 }
 
-function openModal(index){
-    const p = products[index];
+function openModal(i){
+    const p = products[i];
 
-    modalImg.src = p.image;
-    modalTitle.innerText = p.name;
-    modalPrice.innerText = "$"+p.price;
+    modalImg.src=p.image;
+    modalTitle.innerText=p.name;
+    modalPrice.innerText="$"+p.price;
 
     modalSpecs.innerHTML="";
-    p.specs.forEach(s=>{
-        modalSpecs.innerHTML+=`<li>${s}</li>`;
-    });
+    p.specs.forEach(s=> modalSpecs.innerHTML+=`<li>${s}</li>`);
 
-    modalCartBtn.onclick = () => addToCart(index);
+    modalCartBtn.onclick=()=>addToCart(i);
 
     productModal.classList.add("active");
 }
@@ -59,57 +37,53 @@ function closeModal(){
     productModal.classList.remove("active");
 }
 
-function addToCart(index){
-    cart.push(products[index]);
-    localStorage.setItem("cart", JSON.stringify(cart));
+function addToCart(i){
+    cart.push(products[i]);
+    localStorage.setItem("cart",JSON.stringify(cart));
     updateCart();
 }
 
 function updateCart(){
-    document.getElementById("cartCount").innerText = cart.length;
+    cartCount.innerText=cart.length;
 
-    const cartItems = document.getElementById("cartItems");
-    const totalPrice = document.getElementById("totalPrice");
-
+    let total=0;
     cartItems.innerHTML="";
-    let total = 0;
 
-    cart.forEach(item=>{
-        total += item.price;
-        cartItems.innerHTML += `<p>${item.name} - $${item.price}</p>`;
+    cart.forEach(i=>{
+        total+=i.price;
+        cartItems.innerHTML+=`<p>${i.name}</p>`;
     });
 
-    totalPrice.innerText = "Jami: $" + total;
+    totalPrice.innerText="Jami: $"+total;
 }
 
-function openCart(){
-    document.getElementById("cart").classList.add("active");
-}
-
-function closeCart(){
-    document.getElementById("cart").classList.remove("active");
-}
+function openCart(){cart.classList.add("active");}
+function closeCart(){document.getElementById("cart").classList.remove("active");}
 
 function searchProduct(){
-    let value = searchInput.value.toLowerCase();
+    let v=searchInput.value.toLowerCase();
+    displayProducts(products.filter(p=>p.name.toLowerCase().includes(v)));
+}
 
-    const filtered = products.filter(p =>
-        p.name.toLowerCase().includes(value)
+function filterCategory(c){
+    if(c==="all") displayProducts(products);
+    else displayProducts(products.filter(p=>p.category===c));
+}
+
+/* APPLE SWITCH */
+const toggle = document.getElementById("themeToggle");
+
+toggle.addEventListener("change",()=>{
+    document.body.classList.toggle("light");
+
+    localStorage.setItem("theme",
+        document.body.classList.contains("light") ? "light":"dark"
     );
+});
 
-    displayProducts(filtered);
-}
-
-function filterCategory(cat){
-    if(cat === "all"){
-        displayProducts(products);
-    } else {
-        displayProducts(products.filter(p => p.category === cat));
-    }
-}
-
-function toggleMenu(){
-    document.querySelector("nav ul").classList.toggle("active");
+if(localStorage.getItem("theme")==="light"){
+    document.body.classList.add("light");
+    toggle.checked=true;
 }
 
 displayProducts(products);

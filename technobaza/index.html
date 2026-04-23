@@ -1,61 +1,31 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech Shop Pro</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Techno Baza</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ICON -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <header>
-    <h1> Tech Shop</h1>
-
-    <div class="header-right">
-        <!-- APPLE TOGGLE -->
-        <label class="switch">
-            <input type="checkbox" id="themeToggle">
-            <span class="slider"></span>
-        </label>
-
-        <button onclick="openCart()">🛒 <span id="cartCount">0</span></button>
-    </div>
+  <h1>🚀 Techno Baza</h1>
 </header>
 
-<nav>
-    <button onclick="filterCategory('all')">Barchasi</button>
-    <button onclick="filterCategory('laptop')">Noutbuk</button>
-    <button onclick="filterCategory('monitor')">Monitor</button>
-    <button onclick="filterCategory('peripheral')">Qurilmalar</button>
-</nav>
+<main id="products"></main>
 
-<input type="text" id="searchInput" placeholder="Qidiruv..." onkeyup="searchProduct()">
-
-<section class="products" id="productList"></section>
-
-<!-- CART -->
-<div class="cart" id="cart">
-    <h2>Savatcha</h2>
-    <div id="cartItems"></div>
-    <h3 id="totalPrice"></h3>
-    <a href="checkout.html"><button>Checkout</button></a>
-    <button onclick="closeCart()">Yopish</button>
+<!-- 🛒 CART -->
+<div id="cart">
+  <h3><i class="fa fa-shopping-cart"></i> Savatcha</h3>
+  <div id="cart-items"></div>
+  <h4 id="total">Jami: 0$</h4>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="productModal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">×</span>
-
-    <img id="modalImg">
-    <h2 id="modalTitle"></h2>
-    <p id="modalPrice"></p>
-    <ul id="modalSpecs"></ul>
-
-    <button id="modalCartBtn">Savatchaga qo‘shish</button>
-  </div>
-</div>
+<!-- 🧠 TOAST -->
+<div id="toast"></div>
 
 <script src="js/app.js"></script>
 </body>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techno-Baza — Premium Tech Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07080d;
+  --s1:#0d0f18;
+  --s2:#131620;
+  --s3:#1a1d2e;
+  --acc:#c8ff00;
+  --acc2:#ff6b35;
+  --blue:#3d7fff;
+  --text:#eeeef5;
+  --muted:#6a6d85;
+  --dim:#3a3d55;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
+
+/* CUSTOM CURSOR */
+.cur{position:fixed;width:10px;height:10px;background:var(--acc);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.2s,height 0.2s;mix-blend-mode:difference}
+.cur2{position:fixed;width:36px;height:36px;border:1.5px solid rgba(200,255,0,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.18s ease}
+
+/* ========== NAVBAR ========== */
+header{position:sticky;top:0;z-index:500;background:rgba(7,8,13,0.92);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px)}
+.nav-strip{background:linear-gradient(90deg,var(--acc2),var(--acc));height:2.5px}
+.nav-main{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:72px;border-bottom:1px solid var(--border)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-0.5px;color:var(--text);display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:32px;height:32px;background:var(--acc);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.logo span{color:var(--acc)}
+
+.nav-search{flex:1;max-width:420px;margin:0 2.5rem;position:relative}
+.nav-search input{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:10px;padding:10px 16px 10px 42px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s,background 0.2s}
+.nav-search input:focus{border-color:var(--acc);background:var(--s3)}
+.nav-search input::placeholder{color:var(--muted)}
+.nav-search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:0.4}
+
+.nav-actions{display:flex;align-items:center;gap:8px}
+.nav-btn{background:transparent;border:1px solid var(--border2);border-radius:10px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:none;color:var(--muted);font-size:1rem;transition:all 0.18s;position:relative}
+.nav-btn:hover{border-color:var(--acc);color:var(--acc);background:rgba(200,255,0,0.05)}
+.nav-badge{position:absolute;top:-5px;right:-5px;background:var(--acc2);color:#fff;border-radius:50%;width:18px;height:18px;font-size:0.6rem;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.nav-cart{background:var(--acc);color:#000;border:none;border-radius:10px;padding:0 20px;height:42px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;cursor:none;display:flex;align-items:center;gap:8px;transition:all 0.18s;white-space:nowrap}
+.nav-cart:hover{background:#d4ff1a;transform:translateY(-1px)}
+.nav-cart-count{background:rgba(0,0,0,0.25);border-radius:6px;padding:2px 8px;font-size:0.78rem}
+
+.nav-cats{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:48px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.nav-cats::-webkit-scrollbar{display:none}
+.nav-cat-links{display:flex;gap:0;list-style:none;height:100%}
+.nav-cat-links li{height:100%;display:flex}
+.nav-cat-links a{display:flex;align-items:center;gap:6px;padding:0 16px;color:var(--muted);font-size:0.83rem;font-weight:500;cursor:none;border-bottom:2px solid transparent;transition:all 0.18s;white-space:nowrap;height:100%}
+.nav-cat-links a:hover,.nav-cat-links a.active{color:var(--acc);border-bottom-color:var(--acc)}
+.nav-cat-links a .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:0.5}
+.nav-promo-tag{font-size:0.75rem;font-weight:600;color:#000;background:var(--acc2);padding:4px 14px;border-radius:20px;white-space:nowrap;animation:flash 2s infinite}
+@keyframes flash{0%,100%{opacity:1}50%{opacity:0.75}}
+
+/* ========== HERO ========== */
+.hero{position:relative;min-height:540px;display:flex;align-items:center;overflow:hidden;padding:4rem 2.5rem}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 60% 50%,rgba(200,255,0,0.04),transparent),radial-gradient(ellipse 50% 50% at 10% 80%,rgba(61,127,255,0.05),transparent)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+.hero-content{position:relative;z-index:1;max-width:600px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(200,255,0,0.08);border:1px solid rgba(200,255,0,0.2);border-radius:20px;padding:5px 14px;font-size:0.72rem;font-weight:600;color:var(--acc);letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--acc);border-radius:50%;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-1.5px;margin-bottom:1.2rem}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p{color:var(--muted);font-size:1rem;line-height:1.7;max-width:460px;margin-bottom:2rem}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-acc{background:var(--acc);color:#000;border:none;padding:13px 28px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;cursor:none;transition:all 0.18s;display:inline-flex;align-items:center;gap:8px}
+.btn-acc:hover{background:#d4ff1a;transform:translateY(-2px);box-shadow:0 10px 30px rgba(200,255,0,0.2)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border2);padding:13px 28px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;cursor:none;transition:all 0.18s}
+.btn-ghost:hover{border-color:var(--text);background:rgba(255,255,255,0.04)}
+.hero-visual{position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);width:420px;height:380px;display:flex;align-items:center;justify-content:center}
+.hero-img-wrap{position:relative;width:300px;height:300px}
+.hero-glow{position:absolute;inset:-40px;background:radial-gradient(circle,rgba(200,255,0,0.08),transparent 70%);animation:pulse-glow 3s infinite}
+@keyframes pulse-glow{0%,100%{transform:scale(1);opacity:0.8}50%{transform:scale(1.05);opacity:1}}
+.hero-img-wrap img{width:100%;height:100%;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 20px 60px rgba(200,255,0,0.15))}
+
+/* ========== STATS ========== */
+.stats-bar{display:flex;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{flex:1;padding:1.5rem 2.5rem;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--acc)}
+.stat-l{font-size:0.72rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+/* ========== SECTION ========== */
+.section{padding:4rem 2.5rem}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem}
+.sec-label{font-size:0.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:-0.5px}
+.see-all{font-size:0.82rem;color:var(--muted);cursor:none;display:flex;align-items:center;gap:6px;transition:color 0.18s;border:none;background:none;font-family:'DM Sans',sans-serif}
+.see-all:hover{color:var(--acc)}
+
+/* ========== CATEGORIES ========== */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.cat-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1rem;text-align:center;cursor:none;transition:all 0.22s;position:relative;overflow:hidden}
+.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--acc);transform:scaleX(0);transition:transform 0.22s}
+.cat-card:hover{border-color:rgba(200,255,0,0.25);background:var(--s2);transform:translateY(-3px)}
+.cat-card:hover::after{transform:scaleX(1)}
+.cat-card:hover .cat-ico{transform:scale(1.12)}
+.cat-ico{font-size:2rem;display:block;margin-bottom:10px;transition:transform 0.22s}
+.cat-nm{font-size:0.8rem;font-weight:600;color:var(--text)}
+.cat-cnt{font-size:0.68rem;color:var(--muted);margin-top:3px}
+
+/* ========== FILTER BAR ========== */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.fb{background:var(--s1);border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:8px;font-size:0.8rem;font-weight:500;cursor:none;font-family:'DM Sans',sans-serif;transition:all 0.18s}
+.fb:hover{border-color:var(--border2);color:var(--text)}
+.fb.on{background:rgba(200,255,0,0.08);border-color:rgba(200,255,0,0.3);color:var(--acc)}
+
+/* ========== PRODUCT GRID ========== */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.pc{background:var(--s1);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:none;transition:all 0.25s;position:relative;display:flex;flex-direction:column}
+.pc:hover{border-color:rgba(200,255,0,0.2);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.5)}
+.pc-badge{position:absolute;top:10px;left:10px;z-index:2;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:5px}
+.pb-new{background:rgba(200,255,0,0.12);color:var(--acc);border:1px solid rgba(200,255,0,0.25)}
+.pb-sale{background:rgba(255,107,53,0.12);color:var(--acc2);border:1px solid rgba(255,107,53,0.25)}
+.pb-hot{background:rgba(61,127,255,0.12);color:var(--blue);border:1px solid rgba(61,127,255,0.25)}
+.pb-top{background:rgba(255,200,0,0.12);color:#ffc800;border:1px solid rgba(255,200,0,0.25)}
+.pc-wish{position:absolute;top:10px;right:10px;z-index:2;background:rgba(7,8,13,0.6);border:1px solid var(--border2);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.18s;cursor:none}
+.pc-wish:hover{background:rgba(255,107,53,0.15);border-color:var(--acc2)}
+.pc-img{height:175px;background:var(--s2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.pc-img img{width:100%;height:100%;object-fit:contain;padding:16px;transition:transform 0.35s}
+.pc:hover .pc-img img{transform:scale(1.07)}
+.pc-img .fallback{font-size:4rem;display:none}
+.pc-body{padding:14px;flex:1;display:flex;flex-direction:column}
+.pc-stars{color:#ffc800;font-size:0.72rem;margin-bottom:6px;letter-spacing:1px}
+.pc-name{font-weight:600;font-size:0.88rem;line-height:1.4;margin-bottom:3px;color:var(--text)}
+.pc-brand{font-size:0.72rem;color:var(--muted);margin-bottom:12px}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.pc-price{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--acc)}
+.pc-old{font-size:0.7rem;color:var(--muted);text-decoration:line-through;display:block;margin-top:1px}
+.pc-add{background:var(--acc);color:#000;border:none;width:34px;height:34px;border-radius:8px;font-size:1.2rem;font-weight:700;cursor:none;display:flex;align-items:center;justify-content:center;transition:all 0.18s;flex-shrink:0}
+.pc-add:hover{background:#d4ff1a;transform:scale(1.08)}
+
+/* ========== PROMO BANNER ========== */
+.promo{margin:0 2.5rem;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(135deg,#0d1a00,#0a1200);border:1px solid rgba(200,255,0,0.15);padding:3rem}
+.promo-glow{position:absolute;right:-60px;top:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(200,255,0,0.08),transparent 70%)}
+.promo-content{position:relative;z-index:1;max-width:500px}
+.promo h2{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-1px;margin-bottom:0.75rem}
+.promo h2 span{color:var(--acc)}
+.promo p{color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
+.promo-tag{display:inline-block;background:var(--acc);color:#000;font-size:0.72rem;font-weight:700;padding:4px 12px;border-radius:5px;margin-bottom:1rem;letter-spacing:1px;text-transform:uppercase}
+
+/* ========== TOAST ========== */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--s3);border:1px solid rgba(200,255,0,0.3);border-radius:12px;padding:14px 20px;font-size:0.85rem;z-index:9000;transform:translateY(120px);opacity:0;transition:all 0.3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;display:flex;align-items:center;gap:10px;max-width:340px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast-icon{font-size:1.1rem}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur2" id="cur2"></div>
+
+<!-- ======== HEADER ======== -->
+<header>
+  <div class="nav-strip"></div>
+
+  <div class="nav-main">
+    <a class="logo" href="#">
+      <div class="logo-mark">⚡</div>
+      TECHNO<span>-BAZA</span>
+    </a>
+
+    <div class="nav-search">
+      <svg width="15" height="15" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="searchInput" placeholder="Mahsulot, brend yoki kategoriya..." oninput="doSearch(this.value)">
+    </div>
+
+    <div class="nav-actions">
+      <div class="nav-btn" title="Sevimlilar">♡<span class="nav-badge">4</span></div>
+      <div class="nav-btn" title="Taqqoslash">⇄</div>
+      <div class="nav-btn" title="Profil">◎</div>
+      <button class="nav-cart" onclick="openCart()">
+        🛒 Savatcha
+        <span class="nav-cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav-cats">
+    <ul class="nav-cat-links" id="navCatLinks">
+      <li><a class="active" onclick="setCat('Barchasi',this)"><span class="dot"></span>Barchasi</a></li>
+      <li><a onclick="setCat('Smartfonlar',this)">📱 Smartfonlar</a></li>
+      <li><a onclick="setCat('Noutbuklar',this)">💻 Noutbuklar</a></li>
+      <li><a onclick="setCat('Monitorlar',this)">🖥️ Monitorlar</a></li>
+      <li><a onclick="setCat('Audio',this)">🎧 Audio</a></li>
+      <li><a onclick="setCat('Planshetlar',this)">📟 Planshetlar</a></li>
+      <li><a onclick="setCat('Soatlar',this)">⌚ Soatlar</a></li>
+      <li><a onclick="setCat('Mishkalar',this)">🖱️ Mishkalar</a></li>
+      <li><a onclick="setCat('Klaviaturalar',this)">⌨️ Klaviaturalar</a></li>
+      <li><a onclick="setCat('Aksessuarlar',this)">🔌 Aksessuarlar</a></li>
+      <li><a onclick="setCat('Kameralar',this)">📷 Kameralar</a></li>
+    </ul>
+    <div class="nav-promo-tag">🔥 Yozgi chegirmalar -30%</div>
+  </nav>
+</header>
+
+<!-- ======== HERO ======== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">O'zbekistondagi #1 texno do'kon</div>
+    <h1>Texnologiyaning<br><em>Yangi Avlodi</em><br>Sizda</h1>
+    <p>Smartfonlar, noutbuklar, gaming aksessuarlar va boshqa 3000+ mahsulot. Toshkent bo'yicha 24 soatda yetkazib berish.</p>
+    <div class="hero-btns">
+      <button class="btn-acc" onclick="scrollTo2('products')">Xarid qilish →</button>
+      <button class="btn-ghost" onclick="scrollTo2('promo')">Aksiyalar 🔥</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <div class="hero-glow"></div>
+      <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=5120&hei=2880&fmt=webp&qlt=70" alt="iPhone 15 Pro" onerror="this.src='';this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- ======== STATS ======== -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">3000+</div><div class="stat-l">Mahsulot</div></div>
+  <div class="stat"><div class="stat-n">80K+</div><div class="stat-l">Mijoz</div></div>
+  <div class="stat"><div class="stat-n">4.9 ★</div><div class="stat-l">Reyting</div></div>
+  <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Qo'llab-quvvatlash</div></div>
+  <div class="stat"><div class="stat-n">3 yil</div><div class="stat-l">Kafolat</div></div>
+</div>
+
+<!-- ======== CATEGORIES ======== -->
+<section class="section" id="cats">
+  <div class="sec-head">
+    <div><div class="sec-label">Kategoriyalar</div><div class="sec-title">Nima qidiryapsiz?</div></div>
+    <button class="see-all">Barchasini ko'rish →</button>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card" onclick="setCat('Smartfonlar')"><span class="cat-ico">📱</span><div class="cat-nm">Smartfonlar</div><div class="cat-cnt">320 ta</div></div>
+    <div class="cat-card" onclick="setCat('Noutbuklar')"><span class="cat-ico">💻</span><div class="cat-nm">Noutbuklar</div><div class="cat-cnt">185 ta</div></div>
+    <div class="cat-card" onclick="setCat('Monitorlar')"><span class="cat-ico">🖥️</span><div class="cat-nm">Monitorlar</div><div class="cat-cnt">90 ta</div></div>
+    <div class="cat-card" onclick="setCat('Audio')"><span class="cat-ico">🎧</span><div class="cat-nm">Audio</div><div class="cat-cnt">260 ta</div></div>
+    <div class="cat-card" onclick="setCat('Planshetlar')"><span class="cat-ico">📟</span><div class="cat-nm">Planshetlar</div><div class="cat-cnt">95 ta</div></div>
+    <div class="cat-card" onclick="setCat('Soatlar')"><span class="cat-ico">⌚</span><div class="cat-nm">Smart soatlar</div><div class="cat-cnt">140 ta</div></div>
+    <div class="cat-card" onclick="setCat('Mishkalar')"><span class="cat-ico">🖱️</span><div class="cat-nm">Mishkalar</div><div class="cat-cnt">110 ta</div></div>
+    <div class="cat-card" onclick="setCat('Klaviaturalar')"><span class="cat-ico">⌨️</span><div class="cat-nm">Klaviaturalar</div><div class="cat-cnt">75 ta</div></div>
+    <div class="cat-card" onclick="setCat('Aksessuarlar')"><span class="cat-ico">🔌</span><div class="cat-nm">Aksessuarlar</div><div class="cat-cnt">500 ta</div></div>
+    <div class="cat-card" onclick="setCat('Kameralar')"><span class="cat-ico">📷</span><div class="cat-nm">Kameralar</div><div class="cat-cnt">60 ta</div></div>
+  </div>
+</section>
+
+<!-- ======== PRODUCTS ======== -->
+<section class="section" id="products">
+  <div class="sec-head">
+    <div><div class="sec-label">Mahsulotlar</div><div class="sec-title" id="prodTitle">Barcha mahsulotlar</div></div>
+    <button class="see-all" onclick="setCat('Barchasi')">Barchasini ko'rish →</button>
+  </div>
+  <div class="filter-bar" id="filterBar">
+    <button class="fb on" onclick="setCat('Barchasi',null,this)">Barchasi</button>
+    <button class="fb" onclick="setCat('Smartfonlar',null,this)">📱 Smartfonlar</button>
+    <button class="fb" onclick="setCat('Noutbuklar',null,this)">💻 Noutbuklar</button>
+    <button class="fb" onclick="setCat('Monitorlar',null,this)">🖥️ Monitorlar</button>
+    <button class="fb" onclick="setCat('Audio',null,this)">🎧 Audio</button>
+    <button class="fb" onclick="setCat('Planshetlar',null,this)">📟 Planshetlar</button>
+    <button class="fb" onclick="setCat('Soatlar',null,this)">⌚ Soatlar</button>
+    <button class="fb" onclick="setCat('Mishkalar',null,this)">🖱️ Mishkalar</button>
+    <button class="fb" onclick="setCat('Klaviaturalar',null,this)">⌨️ Klaviaturalar</button>
+    <button class="fb" onclick="setCat('Aksessuarlar',null,this)">🔌 Aksessuarlar</button>
+    <button class="fb" onclick="setCat('Kameralar',null,this)">📷 Kameralar</button>
+  </div>
+  <div class="prod-grid" id="prodGrid"></div>
+</section>
+
+<!-- ======== PROMO ======== -->
+<div class="promo" id="promo">
+  <div class="promo-glow"></div>
+  <div class="promo-content">
+    <div class="promo-tag">Maxsus taklif</div>
+    <h2>Gaming setup uchun <span>-25%</span></h2>
+    <p>Barcha gaming mishkalar, klaviaturalar va monitorlarga maxsus chegirma. Faqat shu hafta!</p>
+    <button class="btn-acc" onclick="setCat('Mishkalar')">Xarid qilish →</button>
+  </div>
+</div>
+
+<!-- ======== FOOTER ======== -->
+<footer style="background:var(--s1);border-top:1px solid var(--border);padding:3rem 2.5rem;margin-top:4rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem">
+  <div>
+    <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:1rem;display:flex;align-items:center;gap:8px">
+      <div style="width:28px;height:28px;background:var(--acc);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem">⚡</div>
+      TECHNO-BAZA
+    </div>
+    <p style="color:var(--muted);font-size:0.85rem;line-height:1.7;max-width:260px">O'zbekistondagi eng yirik premium texnika do'koni. Sifat, ishonch va eng qulay narxlar.</p>
+  </div>
+  <div>
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Do'kon</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none;transition:color 0.18s" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">Barcha mahsulotlar</a>
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none;transition:color 0.18s" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">Yangi kelganlar</a>
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none;transition:color 0.18s" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">Aksiyalar</a>
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none;transition:color 0.18s" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">Brendlar</a>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Mijozlarga</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">Yetkazib berish</a>
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">Qaytarish</a>
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">Kafolat</a>
+      <a style="color:var(--muted);font-size:0.85rem;text-decoration:none;cursor:none" onmouseover="this.style.color='var(--acc)'" onmouseout="this.style.color='var(--muted)'">FAQ</a>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Aloqa</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="color:var(--muted);font-size:0.85rem">📞 +998 71 123-45-67</span>
+      <span style="color:var(--muted);font-size:0.85rem">📧 info@techno-baza.uz</span>
+      <span style="color:var(--muted);font-size:0.85rem">📍 Toshkent, Yunusobod</span>
+      <span style="color:var(--muted);font-size:0.85rem">⏰ 09:00 – 21:00</span>
+    </div>
+  </div>
+  <div style="grid-column:1/-1;border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center">
+    <span style="color:var(--muted);font-size:0.8rem">© 2025 Techno-Baza. Barcha huquqlar himoyalangan.</span>
+    <span style="color:var(--muted);font-size:0.8rem">Toshkent, O'zbekiston 🇺🇿</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toastIcon"></span>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+// ---- cursor ----
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+function animateCur(){cx+=(mx-cx)*0.12;cy+=(my-cy)*0.12;cur2.style.left=cx+'px';cur2.style.top=cy+'px';requestAnimationFrame(animateCur)}
+animateCur();
+document.querySelectorAll('button,a,[class*=card],[class*=btn],[class*=pc],[class*=cat-card]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';cur2.style.transform='translate(-50%,-50%) scale(1.3)'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cur2.style.transform='translate(-50%,-50%) scale(1)'});
+});
+
+// ---- data ----
+// Using Unsplash + CDN images that don't have CORS issues
+const PRODUCTS=[
+  // Smartfonlar
+  {id:1,name:"iPhone 15 Pro Max 256GB",brand:"Apple",cat:"Smartfonlar",price:14499000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop&q=80"},
+  {id:2,name:"Samsung Galaxy S24 Ultra",brand:"Samsung",cat:"Smartfonlar",price:12899000,old:15000000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1707227157316-f1a0e3a66238?w=400&h=400&fit=crop&q=80"},
+  {id:3,name:"Xiaomi 14 Ultra",brand:"Xiaomi",cat:"Smartfonlar",price:8899000,old:null,badge:"hot",stars:4,
+   img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=80"},
+  {id:4,name:"OnePlus 12 Pro",brand:"OnePlus",cat:"Smartfonlar",price:6499000,old:7200000,badge:"sale",stars:4,
+   img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=80"},
+  // Noutbuklar
+  {id:5,name:"MacBook Pro 14\" M3 Pro",brand:"Apple",cat:"Noutbuklar",price:24999000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop&q=80"},
+  {id:6,name:"MacBook Air M2 13\"",brand:"Apple",cat:"Noutbuklar",price:16499000,old:18000000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400&h=400&fit=crop&q=80"},
+  {id:7,name:"ASUS ROG Zephyrus G14",brand:"ASUS",cat:"Noutbuklar",price:16699000,old:19000000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&h=400&fit=crop&q=80"},
+  {id:8,name:"Dell XPS 15 OLED",brand:"Dell",cat:"Noutbuklar",price:13499000,old:null,badge:"new",stars:4,
+   img:"https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=400&fit=crop&q=80"},
+  {id:9,name:"Lenovo ThinkPad X1 Carbon",brand:"Lenovo",cat:"Noutbuklar",price:11299000,old:13000000,badge:"sale",stars:4,
+   img:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop&q=80"},
+  // Monitorlar
+  {id:10,name:"LG UltraGear 27\" 4K 144Hz",brand:"LG",cat:"Monitorlar",price:5899000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop&q=80"},
+  {id:11,name:"Samsung Odyssey G7 32\"",brand:"Samsung",cat:"Monitorlar",price:6299000,old:7500000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1585792180666-f7347c490ee2?w=400&h=400&fit=crop&q=80"},
+  {id:12,name:"ASUS ProArt PA279CV 27\"",brand:"ASUS",cat:"Monitorlar",price:4499000,old:null,badge:"top",stars:4,
+   img:"https://images.unsplash.com/photo-1551645120-d70bfe84c826?w=400&h=400&fit=crop&q=80"},
+  // Audio
+  {id:13,name:"Sony WH-1000XM5",brand:"Sony",cat:"Audio",price:3199000,old:null,badge:"hot",stars:5,
+   img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop&q=80"},
+  {id:14,name:"Apple AirPods Pro 2",brand:"Apple",cat:"Audio",price:2799000,old:3200000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=400&h=400&fit=crop&q=80"},
+  {id:15,name:"Bose QuietComfort 45",brand:"Bose",cat:"Audio",price:2999000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=80"},
+  {id:16,name:"Samsung Galaxy Buds 2 Pro",brand:"Samsung",cat:"Audio",price:1399000,old:1700000,badge:"sale",stars:4,
+   img:"https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=400&fit=crop&q=80"},
+  // Planshetlar
+  {id:17,name:"iPad Pro 12.9\" M2",brand:"Apple",cat:"Planshetlar",price:9799000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&q=80"},
+  {id:18,name:"Samsung Galaxy Tab S9 Ultra",brand:"Samsung",cat:"Planshetlar",price:7199000,old:8500000,badge:"sale",stars:4,
+   img:"https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&h=400&fit=crop&q=80"},
+  {id:19,name:"Xiaomi Pad 6 Pro",brand:"Xiaomi",cat:"Planshetlar",price:3599000,old:null,badge:"hot",stars:4,
+   img:"https://images.unsplash.com/photo-1589739900243-4b52cd9b104e?w=400&h=400&fit=crop&q=80"},
+  // Soatlar
+  {id:20,name:"Apple Watch Ultra 2",brand:"Apple",cat:"Soatlar",price:6499000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400&h=400&fit=crop&q=80"},
+  {id:21,name:"Samsung Galaxy Watch 6 Classic",brand:"Samsung",cat:"Soatlar",price:2899000,old:3500000,badge:"sale",stars:4,
+   img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop&q=80"},
+  {id:22,name:"Garmin Fenix 7X Solar",brand:"Garmin",cat:"Soatlar",price:5199000,old:null,badge:"hot",stars:5,
+   img:"https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=400&h=400&fit=crop&q=80"},
+  // Mishkalar
+  {id:23,name:"Logitech MX Master 3S",brand:"Logitech",cat:"Mishkalar",price:799000,old:null,badge:"hot",stars:5,
+   img:"https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop&q=80"},
+  {id:24,name:"Razer DeathAdder V3 Pro",brand:"Razer",cat:"Mishkalar",price:999000,old:1200000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1586349906319-47b5cf297c79?w=400&h=400&fit=crop&q=80"},
+  {id:25,name:"Apple Magic Mouse",brand:"Apple",cat:"Mishkalar",price:599000,old:null,badge:"new",stars:4,
+   img:"https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=400&h=400&fit=crop&q=80"},
+  {id:26,name:"SteelSeries Rival 650",brand:"SteelSeries",cat:"Mishkalar",price:699000,old:850000,badge:"sale",stars:4,
+   img:"https://images.unsplash.com/photo-1613141411244-0e4ac259d45f?w=400&h=400&fit=crop&q=80"},
+  // Klaviaturalar
+  {id:27,name:"Logitech MX Keys S",brand:"Logitech",cat:"Klaviaturalar",price:849000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop&q=80"},
+  {id:28,name:"Razer BlackWidow V4 Pro",brand:"Razer",cat:"Klaviaturalar",price:1299000,old:1599000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400&h=400&fit=crop&q=80"},
+  {id:29,name:"Apple Magic Keyboard",brand:"Apple",cat:"Klaviaturalar",price:699000,old:null,badge:"top",stars:4,
+   img:"https://images.unsplash.com/photo-1526657782461-9fe13402a841?w=400&h=400&fit=crop&q=80"},
+  {id:30,name:"Keychron K8 Pro",brand:"Keychron",cat:"Klaviaturalar",price:999000,old:1200000,badge:"hot",stars:5,
+   img:"https://images.unsplash.com/photo-1595044426077-d36d9236d54a?w=400&h=400&fit=crop&q=80"},
+  // Aksessuarlar
+  {id:31,name:"Anker 140W GaN Charger",brand:"Anker",cat:"Aksessuarlar",price:299000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=400&fit=crop&q=80"},
+  {id:32,name:"Belkin MagSafe 3-in-1",brand:"Belkin",cat:"Aksessuarlar",price:599000,old:750000,badge:"sale",stars:4,
+   img:"https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=400&fit=crop&q=80"},
+  {id:33,name:"Samsung 65W Super Fast Charger",brand:"Samsung",cat:"Aksessuarlar",price:199000,old:null,badge:"hot",stars:4,
+   img:"https://images.unsplash.com/photo-1601972599748-b9d45e6a1b62?w=400&h=400&fit=crop&q=80"},
+  {id:34,name:"Apple USB-C Hub 7-in-1",brand:"Apple",cat:"Aksessuarlar",price:449000,old:550000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=80"},
+  {id:35,name:"Anker PowerCore 26800",brand:"Anker",cat:"Aksessuarlar",price:399000,old:null,badge:"top",stars:5,
+   img:"https://images.unsplash.com/photo-1618385418310-c62e2c4cf3e4?w=400&h=400&fit=crop&q=80"},
+  // Kameralar
+  {id:36,name:"Sony A7 IV Mirrorless",brand:"Sony",cat:"Kameralar",price:18999000,old:null,badge:"new",stars:5,
+   img:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=400&fit=crop&q=80"},
+  {id:37,name:"Canon EOS R8",brand:"Canon",cat:"Kameralar",price:12499000,old:14000000,badge:"sale",stars:5,
+   img:"https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=400&fit=crop&q=80"},
+  {id:38,name:"GoPro Hero 12 Black",brand:"GoPro",cat:"Kameralar",price:2699000,old:null,badge:"hot",stars:4,
+   img:"https://images.unsplash.com/photo-1601381718415-a05fb0a261f3?w=400&h=400&fit=crop&q=80"},
+];
+
+const badgeMap={new:"pb-new",sale:"pb-sale",hot:"pb-hot",top:"pb-top"};
+const badgeLbl={new:"YANGI",sale:"CHEGIRMA",hot:"🔥 HOT",top:"⭐ TOP"};
+
+let cartN=0, curCat='Barchasi', searchQ='';
+
+function fmt(n){return n.toLocaleString('uz-UZ')+' so\'m'}
+function sts(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
+
+function getFiltered(){
+  let list=PRODUCTS;
+  if(curCat!=='Barchasi') list=list.filter(p=>p.cat===curCat);
+  if(searchQ) list=list.filter(p=>p.name.toLowerCase().includes(searchQ)||p.brand.toLowerCase().includes(searchQ)||p.cat.toLowerCase().includes(searchQ));
+  return list;
+}
+
+function renderGrid(){
+  const list=getFiltered();
+  const g=document.getElementById('prodGrid');
+  document.getElementById('prodTitle').textContent=curCat==='Barchasi'?'Barcha mahsulotlar':curCat;
+  if(!list.length){g.innerHTML=`<p style="color:var(--muted);grid-column:1/-1;padding:2rem 0">Mahsulot topilmadi 😕</p>`;return}
+  g.innerHTML=list.map(p=>`
+    <div class="pc">
+      <div class="pc-badge ${badgeMap[p.badge]||'pb-new'}">${badgeLbl[p.badge]||'YANGI'}</div>
+      <div class="pc-wish" onclick="event.stopPropagation();wishlist('${p.name}')">♡</div>
+      <div class="pc-img">
+        <img src="${p.img}" alt="${p.name}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+          loading="lazy">
+        <div class="fallback" style="font-size:3.5rem;width:100%;height:100%;display:none;align-items:center;justify-content:center">${getCatIcon(p.cat)}</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-stars">${sts(p.stars)}</div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-brand">${p.brand}</div>
+        <div class="pc-foot">
+          <div>
+            <div class="pc-price">${fmt(p.price)}</div>
+            ${p.old?`<div class="pc-old">${fmt(p.old)}</div>`:''}
+          </div>
+          <button class="pc-add" onclick="addCart('${p.name}')">+</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function getCatIcon(cat){
+  const m={Smartfonlar:'📱',Noutbuklar:'💻',Monitorlar:'🖥️',Audio:'🎧',Planshetlar:'📟',Soatlar:'⌚',Mishkalar:'🖱️',Klaviaturalar:'⌨️',Aksessuarlar:'🔌',Kameralar:'📷'};
+  return m[cat]||'📦';
+}
+
+function setCat(cat, navEl, fbEl){
+  curCat=cat;
+  // update nav
+  document.querySelectorAll('.nav-cat-links a').forEach(a=>a.classList.remove('active'));
+  if(navEl) navEl.classList.add('active');
+  // update filter bar
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  if(fbEl) fbEl.classList.add('on');
+  renderGrid();
+  scrollTo2('products');
+}
+
+function doSearch(q){
+  searchQ=q.trim().toLowerCase();
+  renderGrid();
+}
+
+function addCart(name){
+  cartN++;
+  document.getElementById('cartCount').textContent=cartN;
+  showToast('✅',name+' savatchaga qo\'shildi!');
+}
+function wishlist(name){showToast('♡',name+' sevimlilarga qo\'shildi!')}
+function openCart(){showToast('🛒','Savatchada '+cartN+' ta mahsulot bor')}
+
+function showToast(icon,msg){
+  document.getElementById('toastIcon').textContent=icon;
+  document.getElementById('toastMsg').textContent=msg;
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+function scrollTo2(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+renderGrid();
+</script>
+</body>
+</html>
